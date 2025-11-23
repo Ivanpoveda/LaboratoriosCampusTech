@@ -31,6 +31,11 @@ namespace LaboratoriosCampusTech.Models
         public TimeSpan EndTime { get; set; }
 
         [Required]
+        [MinLength(5)]
+        [MaxLength(200)]
+        public string Reason { get; set; }
+
+        [Required]
         [RegularExpression(@"^RES-\d{3}$")]
         public string ReservationCode { get; set; }
 
