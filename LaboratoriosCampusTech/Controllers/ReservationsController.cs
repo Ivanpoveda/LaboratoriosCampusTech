@@ -19,15 +19,15 @@ namespace LaboratoriosCampusTech.Controllers
 
         public IActionResult Create()
         {
-            return View(new Reservation { ReservationDate = DateTime.Today });
+            return View(new Reservation { FechaReservacion = DateTime.Today });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Reservation reservation)
         {
-            if (_repo.ExistsByCode(reservation.ReservationCode))
-                ModelState.AddModelError(nameof(reservation.ReservationCode), "Código ya existe.");
+            if (_repo.ExistsByCode(reservation.CodigoReservacion))
+                ModelState.AddModelError(nameof(reservation.CodigoReservacion), "Código ya existe.");
 
             if (!ModelState.IsValid)
                 return View(reservation);

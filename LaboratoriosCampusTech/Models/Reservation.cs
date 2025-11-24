@@ -8,46 +8,46 @@ namespace LaboratoriosCampusTech.Models
     {
         [Required]
         [MinLength(3)]
-        public string ProfessorName { get; set; }
+        public string NombreProfesor { get; set; }
 
         [Required]
         [EmailAddress]
         [RegularExpression(@"^[\w\.-]+@campus\.edu$", ErrorMessage = "Debe ser un correo institucional @campus.edu")]
-        public string InstitucionalEmail { get; set; }
+        public string EmailInstitucional { get; set; }
 
         [Required]
-        [RegularExpression(@"^(Lab-01|Lab-02|Lab-03|Lab-Redes|Lab-IA)$")]
+        [RegularExpression(@"^(Lab-01|Lab-02|Lab-03|Lab-04|Lab-05)$")]
         public string Lab { get; set; }
 
         [Required]
-        public DateTime ReservationDate { get; set; }
+        public DateTime FechaReservacion { get; set; }
 
         [Required]
 
-        public TimeSpan StartTime { get; set; }
+        public TimeSpan TiempoInicio { get; set; }
 
         [Required]
 
-        public TimeSpan EndTime { get; set; }
+        public TimeSpan TiempoFinal { get; set; }
 
         [Required]
         [MinLength(5)]
         [MaxLength(200)]
-        public string Reason { get; set; }
+        public string Razon { get; set; }
 
         [Required]
-        [RegularExpression(@"^RES-\d{3}$")]
-        public string ReservationCode { get; set; }
+        [RegularExpression(@"^RES-\d{3}$", ErrorMessage = "El codigo debe ser RES-000")]
+        public string CodigoReservacion { get; set; }
 
-        public string TimeRange => $"{StartTime:hh\\:mm} - {EndTime:hh\\:mm}";
+        public string TimeRange => $"{TiempoInicio:hh\\:mm} - {TiempoFinal:hh\\:mm}";
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (ReservationDate.Date < DateTime.Today)
-                yield return new ValidationResult("La fecha no puede ser pasada.", new[] { nameof(ReservationDate) });
+            if (FechaReservacion.Date < DateTime.Today)
+                yield return new ValidationResult("La fecha no puede ser pasada.", new[] { nameof(FechaReservacion) });
 
-            if (EndTime <= StartTime)
-                yield return new ValidationResult("La hora de fin debe ser mayor a la de inicio.", new[] { nameof(EndTime) });
+            if (TiempoFinal <= TiempoInicio)
+                yield return new ValidationResult("La hora de fin debe ser mayor a la de inicio.", new[] { nameof(TiempoFinal) });
         }
     }
 }

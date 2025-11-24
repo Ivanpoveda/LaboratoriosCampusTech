@@ -7,33 +7,34 @@ namespace LaboratoriosCampusTech.Data
     public class InMemoryReservationRepository : IReservationRepository
     {
         private readonly List<Reservation> _reservations = new();
-
-        public InMemoryReservationRepository()
+     
+            public void AddReservation(Reservation r)
         {
-            _reservations.Add(new Reservation
+            if (string.IsNullOrWhiteSpace(r.NombreProfesor) ||
+                string.IsNullOrWhiteSpace(r.EmailInstitucional) ||
+                string.IsNullOrWhiteSpace(r.Lab) ||
+                string.IsNullOrWhiteSpace(r.Razon) ||
+                r.TiempoInicio == r.TiempoFinal)
             {
-                ProfessorName = "Dr. Ana López",
-                InstitucionalEmail = "ana.lopez@campus.edu",
-                Lab = "Lab-01",
-                ReservationDate = System.DateTime.Today.AddDays(1),
-                StartTime = new System.TimeSpan(9, 0, 0),
-                EndTime = new System.TimeSpan(11, 0, 0),
-                Reason = "Clase de programación.",
-                ReservationCode = "RES-001"
-            });
+                // No agregar reservas inválidas
+                return;
+            }
+
+            _reservations.Add(r);
         }
+        
 
         public IEnumerable<Reservation> GetAll() =>
-            _reservations.OrderBy(r => r.ReservationDate).ThenBy(r => r.StartTime);
+            _reservations.OrderBy(r => r.FechaReservacion).ThenBy(r => r.TiempoInicio);
 
         public void Add(Reservation r)
         {
-            if (ExistsByCode(r.ReservationCode))
+            if (ExistsByCode(r.CodigoReservacion))
                 throw new System.Exception("El código ya existe.");
             _reservations.Add(r);
         }
 
         public bool ExistsByCode(string code) =>
-            _reservations.Any(r => r.ReservationCode.ToUpper() == code.ToUpper());
+            _reservations.Any(r => r.CodigoReservacion.ToUpper() == code.ToUpper());
     }
 }

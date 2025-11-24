@@ -1,0 +1,71 @@
+﻿@model LaboratoriosCampusTech.Models.Reservation
+
+<div class="card card-glow p-4">
+    <h3 class="mb-3">Crear Nueva Reserva</h3>
+
+    <form asp-action="Create" method="post" class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="NombreProfesor"></label>
+            <input asp-for="NombreProfesor" class="form-control" />
+            <span asp-validation-for="NombreProfesor" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="EmailInstitucional"></label>
+            <input asp-for="EmailInstitucional" class="form-control" />
+            <span asp-validation-for="EmailInstitucional" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="Lab"></label>
+            <select asp-for="Lab" class="form-select">
+                <option value="">Seleccione...</option>
+                <option>Lab-01</option>
+                <option>Lab-02</option>
+                <option>Lab-03</option>
+                <option>Lab-04</option>
+                <option>Lab-05</option>
+            </select>
+            <span asp-validation-for="Lab" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="FechaReservacion">Fecha</label>
+            <input type="date" asp-for="FechaReservacion" class="form-control" />
+            <span asp-validation-for="FechaReservacion" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-2">
+            <label>Inicio</label>
+            <input type="time" asp-for="TiempoInicio" class="form-control" />
+            <span asp-validation-for="TiempoInicio" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-2">
+            <label>Fin</label>
+            <input type="time" asp-for="TiempoFinal" class="form-control" />
+            <span asp-validation-for="TiempoFinal" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12">
+            <label asp-for="Razon"></label>
+            <textarea asp-for="Razon" class="form-control"></textarea>
+            <span asp-validation-for="Razon" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="CodigoReservacion"></label>
+            <input asp-for="CodigoReservacion" class="form-control" />
+            <span asp-validation-for="CodigoReservacion" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 mt-3">
+            <button class="btn btn-primary">Guardar</button>
+            <a href="/Reservations" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

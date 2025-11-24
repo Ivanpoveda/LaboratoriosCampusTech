@@ -1,0 +1,48 @@
+﻿@model IEnumerable<LaboratoriosCampusTech.Models.Reservation>
+
+<!-- Título de Bienvenida -->
+<div class="text-center mt-4 mb-4">
+    <h1 class="display-5 fw-bold">Bienvenido a Laboratorios CampusTech</h1>
+    <p class="text-muted">Sistema de Gestión de Reservas</p>
+</div>
+
+<div class="card card-glow p-3">
+
+    <div class="d-flex justify-content-between mb-3">
+        <h3>Lista de Reservas</h3>
+        <a class="btn btn-outline-primary" href="/Reservations/Create">Crear Reserva</a>
+    </div>
+
+    @if (Model != null && Model.Any())
+
+    {
+        <table class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Código</th>
+                    <th>Profesor</th>
+                    <th>Correo</th>
+                    <th>Lab</th>
+                    <th>Fecha</th>
+                    <th>Horario</th>
+                    <th>Motivo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model)
+                {
+                    <tr>
+                        <td><span class="badge bg-success">@r.CodigoReservacion</span></td>
+                        <td>@r.NombreProfesor</td>
+                        <td>@r.EmailInstitucional</td>
+                        <td>@r.Lab</td>
+                        <td>@r.FechaReservacion.ToString("yyyy-MM-dd")</td>
+                        <td>@r.TimeRange</td>
+                        <td>@r.Razon</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
